@@ -16,11 +16,11 @@ const Header = () => {
                 </h1>
             </div>
 
-            {/* Search Bar Area */}
-            <div className="flex-1 max-w-md ml-20 relative">
+            {/* Search Bar Area */} 
+            <div className="flex-1 max-w-md ml-20 relative sm:w-full sm:ml-5">
                 <input 
                     type="text" 
-                    placeholder="Buscar tokens, pares o direcciones..." 
+                    placeholder="Buscar Moneda" 
                     className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-4 pr-4 py-2 text-sm focus:ring-1 focus:ring-[#25f46a] focus:border-[#25f46a] outline-none transition-all placeholder:text-slate-400 text-slate-900"
                     value={coinName}
                     onChange={(e) => setCoinName(e.target.value)}
