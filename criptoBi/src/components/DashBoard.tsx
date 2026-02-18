@@ -56,8 +56,10 @@ const Dashboard = () => {
         </div>
         :
         <section className="w-full mx-auto p-8 grid grid-cols-3 grid-rows-[auto_1fr] gap-6">
-            
-            {!error && <p className="col-span-3 text-red-500 bg-red-500/10 p-3 rounded-lg border border-red-500/20">Error al cargar los datos</p>}
+            <p className="col-span-3 text-black bg-green-500/10 p-3 rounded-lg border border-red-500/20">
+                Si quieres ver el codigo puedes hacerlo aqui: <a href="https://github.com/brianpm141/ReactEjercicio.git" target="_blank" > <strong>Repositorio de Github</strong></a>
+            </p>
+            {error && <p className="col-span-3 text-red-500 bg-red-500/10 p-3 rounded-lg border border-red-500/20">Error al cargar los datos</p>}
             <Metrica title="Valor total del mercado" value={marketCapTotal} />
             <Metrica title="Crecimiento promedio" value={marquetCapPromedio} />
             <Metrica title="Mayor crecimiento" value={mayorCrecimiento?.name || "N/A"} />
