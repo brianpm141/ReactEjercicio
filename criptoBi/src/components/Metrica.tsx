@@ -1,10 +1,11 @@
+import React from "react";
+
 interface MetricaProps {
     title: string;
     value: string | number;
 }
 
-const Metrica = (props: MetricaProps) => {
-    // Formateo simple para números grandes (opcional, manteniendo tu lógica)
+const Metrica = React.memo((props: MetricaProps) => {
     const displayValue = typeof props.value === 'number' 
         ? props.value.toLocaleString('en-US', { maximumFractionDigits: 2 }) 
         : props.value;
@@ -25,5 +26,6 @@ const Metrica = (props: MetricaProps) => {
         </article>
     ) 
 }
+)
 
 export default Metrica

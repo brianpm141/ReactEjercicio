@@ -1,3 +1,5 @@
+import React from "react";
+
 interface CoinProps {
     number: number;
     title: string;
@@ -7,12 +9,12 @@ interface CoinProps {
     icon: string;
 }
 
-const Coin = (props: CoinProps) => {
+const Coin = React.memo((props: CoinProps) => {
+
     const isPositive = props.change > 0;
 
     return (
         <article className="group bg-white border border-slate-200 rounded-xl p-5 hover:border-[#25f46a] transition-all cursor-pointer shadow-sm">
-            {/* Top Section: Info & Icon */}
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                     <span className="text-slate-400 text-xs font-bold">#{props.number}</span>
@@ -24,13 +26,11 @@ const Coin = (props: CoinProps) => {
                         <span className="text-xs text-slate-500 font-medium uppercase">{props.simbol}</span>
                     </div>
                 </div>
-                {/* Botón de estrella decorativo como en la referencia */}
                 <button className="text-slate-300 hover:text-[#25f46a] transition-colors">
                     <span className="text-xl">★</span>
                 </button>
             </div>
 
-            {/* Bottom Section: Price & Trend */}
             <div className="flex items-end justify-between">
                 <div>
                     <p className="text-xl font-bold tabular-nums text-slate-900">
@@ -46,5 +46,6 @@ const Coin = (props: CoinProps) => {
         </article>
     ) 
 }
+)
 
 export default Coin

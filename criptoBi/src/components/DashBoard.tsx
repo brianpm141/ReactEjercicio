@@ -9,7 +9,7 @@ import {useCoinName} from "../context/coinContext"
 const API = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc"
 
 const Dashboard = () => {
-    const { data, loading, error } = useFetch<CoinType[]>(API);
+    const { data, loading, error } = useFetch<CoinType[]>(API, 30000); // Actualizar cada 30s
     const { coinName, crecimiento } = useCoinName(); 
 
     const marketCapTotal = useMemo(() => {
@@ -26,21 +26,26 @@ const Dashboard = () => {
     const mayorCrecimiento = useMemo(() => {
         if (!data || data.length === 0) return null;
         return data.reduce((prev, curr) => {
-            return (prev.price_change_24h > curr.price_change_24h) ? prev : curr;
+            return (prev.market_cap_change_percentage_24h > curr.market_cap_change_percentage_24h) ? prev : curr;
         })
     }, [data])
 
     const orderData = useMemo(() => {
-        if (!data) return[]
-        
-        if (crecimiento === "default") return data;
+    if (!data || !Array.isArray(data)) return [];
+    
+    if (crecimiento === "default") return [...data];
+
+    return [...data].sort((a, b) => {
+        const valA = a.market_cap_change_percentage_24h ?? 0;
+        const valB = b.market_cap_change_percentage_24h ?? 0;
+
         if (crecimiento === "mayor") {
-            return [...data].sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
-        }else {
-            return [...data].sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
+            return valB - valA;
+        } else {
+            return valA - valB; 
         }
-        
-    },[data, crecimiento])
+    });
+}, [data, crecimiento]);
 
     const filteredData = useMemo(() => {
         if (!orderData) return [];
