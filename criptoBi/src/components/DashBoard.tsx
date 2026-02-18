@@ -9,7 +9,7 @@ import {useCoinName} from "../context/coinContext"
 const API = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc"
 
 const Dashboard = () => {
-    const { data, loading, error } = useFetch<CoinType[]>(API, 30000); // Actualizar cada 30s
+    const { data, loading, error } = useFetch<CoinType[]>(API, 60000); // Actualizar cada 30s
     const { coinName, crecimiento } = useCoinName(); 
 
     const marketCapTotal = useMemo(() => {
